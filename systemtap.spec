@@ -530,7 +530,7 @@ cd ..
 %global docs_config --enable-docs --disable-htmldocs
 %endif
 %else
-%global docs_config --disable-docs
+%global docs_config --disable-docs --without-debuginfod
 %endif
 
 # Enable pie as configure defaults to disabling it
