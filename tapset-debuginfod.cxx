@@ -12,7 +12,7 @@
 #include "util.h"
 #include "fnmatch.h"
 
-#if defined(HAVE_LIBDEBUGINFOD_) && defined(HAVE_JSON_C) && defined(METADATA_QUERY_ENABLED)
+// #if defined(HAVE_LIBDEBUGINFOD_) && defined(HAVE_JSON_C) && defined(METADATA_QUERY_ENABLED)
 
 #include <elfutils/debuginfod.h>
 #include <json-c/json.h>

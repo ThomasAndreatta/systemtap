@@ -36,9 +36,9 @@ extern "C" {
 #include <unistd.h>
 }
 
-#if defined(HAVE_LIBDEBUGINFOD_)
-#include <elfutils/debuginfod.h>
-#endif
+// #if defined(HAVE_LIBDEBUGINFOD_)
+// #include <elfutils/debuginfod.h>
+// #endif
 
 // XXX: also consider adding $HOME/.debug/ for perf build-id-cache
 static const char *debuginfo_path_arr = "+:.debug:/usr/lib/debug:/var/cache/abrt-di/usr/lib/debug:build";
@@ -358,62 +358,62 @@ void debuginfo_path_insert_sysroot(string sysroot)
 }
 
 
-#if defined(HAVE_LIBDEBUGINFOD_)
-static
-int
-debuginfod_progressfn (debuginfod_client *c,
-                       long a, long b)
-{
-  // PR31368: Cancel the download in case Ctrl-C is hit.
-  if (pending_interrupts > 0) {
-    fprintf(stderr, "\nInterrupt received, exiting.\n");
-    return 1;
-  }
+// #if defined(HAVE_LIBDEBUGINFOD_)
+// static
+// int
+// debuginfod_progressfn (debuginfod_client *c,
+//                        long a, long b)
+// {
+//   // PR31368: Cancel the download in case Ctrl-C is hit.
+//   if (pending_interrupts > 0) {
+//     fprintf(stderr, "\nInterrupt received, exiting.\n");
+//     return 1;
+//   }
 
-  // Skip showing unsolicited information.
-  if (debuginfod_progress == NULL
-      || strcmp(debuginfod_progress, "0") == 0)
-    return 0;
+//   // Skip showing unsolicited information.
+//   if (debuginfod_progress == NULL
+//       || strcmp(debuginfod_progress, "0") == 0)
+//     return 0;
 
-  // Model after debuginfod-client.c's default_progressfn()
-  // If it was a public function, we could reuse, but alas.
-  const char* url = debuginfod_get_url (c);
-  int len = 0;
+//   // Model after debuginfod-client.c's default_progressfn()
+//   // If it was a public function, we could reuse, but alas.
+//   const char* url = debuginfod_get_url (c);
+//   int len = 0;
 
-  /* We prefer to print the host part of the URL to keep the
-     message short. */
-  if (url != NULL)
-    {
-      const char* buildid = strstr(url, "buildid/");
-      if (buildid != NULL)
-        len = (buildid - url);
-      else
-        len = strlen(url);
-    }
+//   /* We prefer to print the host part of the URL to keep the
+//      message short. */
+//   if (url != NULL)
+//     {
+//       const char* buildid = strstr(url, "buildid/");
+//       if (buildid != NULL)
+//         len = (buildid - url);
+//       else
+//         len = strlen(url);
+//     }
 
-  if (b == 0 || url==NULL) /* early stage */
-    dprintf(STDERR_FILENO,
-            "\rDownloading %c", "-/|\\"[a % 4]);
-  else if (b < 0) /* download in progress but unknown total length */
-    dprintf(STDERR_FILENO,
-            "\rDownloading from %.*s %ld",
-            len, url, a);
-  else /* download in progress, and known total length */
-    dprintf(STDERR_FILENO,
-            "\rDownloading from %.*s %ld/%ld",
-            len, url, a, b);
+//   if (b == 0 || url==NULL) /* early stage */
+//     dprintf(STDERR_FILENO,
+//             "\rDownloading %c", "-/|\\"[a % 4]);
+//   else if (b < 0) /* download in progress but unknown total length */
+//     dprintf(STDERR_FILENO,
+//             "\rDownloading from %.*s %ld",
+//             len, url, a);
+//   else /* download in progress, and known total length */
+//     dprintf(STDERR_FILENO,
+//             "\rDownloading from %.*s %ld/%ld",
+//             len, url, a, b);
 
-  return 0;
-}
+//   return 0;
+// }
 
-void
-setup_debuginfod_progress(Dwfl *dwfl)
-{
-  debuginfod_client *c = NULL;
-  if (c != NULL)
-    debuginfod_set_progressfn (c, debuginfod_progressfn);
-}
-#endif
+// void
+// setup_debuginfod_progress(Dwfl *dwfl)
+// {
+//   debuginfod_client *c = NULL;
+//   if (c != NULL)
+//     debuginfod_set_progressfn (c, debuginfod_progressfn);
+// }
+// #endif
 
 
 static Dwfl *

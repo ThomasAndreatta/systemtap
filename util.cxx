@@ -48,9 +48,9 @@ extern "C" {
 #include <libgen.h>
 #include <pwd.h>
 
-#ifdef HAVE_LIBDEBUGINFOD_
-#include <elfutils/debuginfod.h>
-#endif
+// #ifdef HAVE_LIBDEBUGINFOD_
+// #include <elfutils/debuginfod.h>
+// #endif
 }
 
 
@@ -599,28 +599,28 @@ string find_executable(const string& name, const string& sysroot,
         {
           retpath = follow_link(f, sysroot);
         }
-#ifdef HAVE_LIBDEBUGINFOD_
-      if (retpath == "")
-        {
-          // Query debuginfod for the executable.
-          static unique_ptr <debuginfod_client, void (*)(debuginfod_client*)>
-            client (debuginfod_begin(), &debuginfod_end);
+// #ifdef HAVE_LIBDEBUGINFOD_
+//       if (retpath == "")
+//         {
+//           // Query debuginfod for the executable.
+//           static unique_ptr <debuginfod_client, void (*)(debuginfod_client*)>
+//             client (debuginfod_begin(), &debuginfod_end);
           
-          if (client.get() != NULL)
-            {
-              char *p;
-              int fd = debuginfod_find_executable(client.get(),
-                                                  (const unsigned char*)(name.c_str()),
-                                                  0, &p);
-              if (fd >= 0)
-                {
-                  retpath = p;
-                  free(p);
-                  close(fd);
-                }
-            }
-        }
-#endif /* HAVE_LIBDEBUGINFOD_ */
+//           if (client.get() != NULL)
+//             {
+//               char *p;
+//               int fd = debuginfod_find_executable(client.get(),
+//                                                   (const unsigned char*)(name.c_str()),
+//                                                   0, &p);
+//               if (fd >= 0)
+//                 {
+//                   retpath = p;
+//                   free(p);
+//                   close(fd);
+//                 }
+//             }
+//         }
+// #endif /* HAVE_LIBDEBUGINFOD_ */
     }
   else if (name.find('/') != string::npos) // slash in the path already?
     {
