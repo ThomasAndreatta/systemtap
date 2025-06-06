@@ -409,7 +409,7 @@ debuginfod_progressfn (debuginfod_client *c,
 void
 setup_debuginfod_progress(Dwfl *dwfl)
 {
-  debuginfod_client *c = dwfl_get_debuginfod_client (dwfl);
+  debuginfod_client *c = debuginfod_client (dwfl);
   if (c != NULL)
     debuginfod_set_progressfn (c, debuginfod_progressfn);
 }
