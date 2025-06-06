@@ -36,7 +36,7 @@ extern "C" {
 #include <unistd.h>
 }
 
-#if defined(HAVE_LIBDEBUGINFOD)
+#if defined(HAVE_LIBDEBUGINFOD_)
 #include <elfutils/debuginfod.h>
 #endif
 
@@ -358,7 +358,7 @@ void debuginfo_path_insert_sysroot(string sysroot)
 }
 
 
-#if defined(HAVE_LIBDEBUGINFOD)
+#if defined(HAVE_LIBDEBUGINFOD_)
 static
 int
 debuginfod_progressfn (debuginfod_client *c,

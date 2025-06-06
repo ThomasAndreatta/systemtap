@@ -48,7 +48,7 @@ extern "C" {
 #include <libgen.h>
 #include <pwd.h>
 
-#ifdef HAVE_LIBDEBUGINFOD
+#ifdef HAVE_LIBDEBUGINFOD_
 #include <elfutils/debuginfod.h>
 #endif
 }
@@ -599,7 +599,7 @@ string find_executable(const string& name, const string& sysroot,
         {
           retpath = follow_link(f, sysroot);
         }
-#ifdef HAVE_LIBDEBUGINFOD
+#ifdef HAVE_LIBDEBUGINFOD_
       if (retpath == "")
         {
           // Query debuginfod for the executable.
@@ -620,7 +620,7 @@ string find_executable(const string& name, const string& sysroot,
                 }
             }
         }
-#endif /* HAVE_LIBDEBUGINFOD */
+#endif /* HAVE_LIBDEBUGINFOD_ */
     }
   else if (name.find('/') != string::npos) // slash in the path already?
     {

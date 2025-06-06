@@ -11584,7 +11584,7 @@ if expr "$with_debuginfod" : "/.*" >/dev/null; then
   debuginfod_CFLAGS=-I$with_debuginfod/include
   have_debuginfod=1
 
-printf "%s\n" "#define HAVE_LIBDEBUGINFOD 1" >>confdefs.h
+printf "%s\n" "#define HAVE_LIBDEBUGINFOD_ 1" >>confdefs.h
 
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 printf "%s\n" "yes" >&6; }
@@ -11664,7 +11664,7 @@ else
 printf "%s\n" "yes" >&6; }
 	have_debuginfod=1
 
-printf "%s\n" "#define HAVE_LIBDEBUGINFOD 1" >>confdefs.h
+printf "%s\n" "#define HAVE_LIBDEBUGINFOD_ 1" >>confdefs.h
 
 fi
 else

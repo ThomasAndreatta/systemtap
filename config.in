@@ -80,7 +80,7 @@
 #undef HAVE_LANGUAGE_SERVER_SUPPORT
 
 /* Define to 1 if debuginfod is enabled. */
-#undef HAVE_LIBDEBUGINFOD
+#undef HAVE_LIBDEBUGINFOD_
 
 /* Define to 1 if you have the `dw' library (-ldw). */
 #undef HAVE_LIBDW
