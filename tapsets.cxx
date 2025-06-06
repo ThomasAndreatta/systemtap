@@ -13168,7 +13168,7 @@ register_standard_tapsets(systemtap_session & s)
   register_tapset_timers(s);
   register_tapset_netfilter(s);
   register_tapset_utrace(s);
-  register_tapset_debuginfod(s);
+//   register_tapset_debuginfod(s);
 
   // dwarf-based kprobe/uprobe parts
   dwarf_derived_probe::register_patterns(s);
